@@ -429,10 +429,7 @@ namespace pebblMonom {
 
     // obsLess comparator for sorted observations, 
     // use "radix-like sorting" later
-    class obsLess : 
-    public std::binary_function<const observation_t &,
-      const observation_t &,
-      bool> 
+    class obsLess 
 	{
 	public:
 	  // comparator created given list of vars not in monom
@@ -783,13 +780,13 @@ namespace pebblMonom {
     set<size_type> _posCovgIdx;
     set<size_type> _negCovgIdx;
 
-    struct maxMonomSubComp : binary_function<branchSub *, branchSub *, bool>
+    struct maxMonomSubComp
       {
 	bool operator() (branchSub *s1, branchSub *s2) const
 	{ return (s2->bound < s1->bound); }
       }; 
 
-    struct maxMonomSubEqComp : binary_function<maxMonomSub *, maxMonomSub *, bool>
+    struct maxMonomSubEqComp
       {
 	bool operator() (maxMonomSub *s1, maxMonomSub *s2) const
 	{ return s1->_monom == s2->_monom;  }
