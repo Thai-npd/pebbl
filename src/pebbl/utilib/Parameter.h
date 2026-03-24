@@ -25,6 +25,7 @@
 #include <pebbl/utilib/std_headers.h>
 #include <pebbl/utilib/exception_mngr.h>
 #include <pebbl/utilib/ValidateParameter.h>
+#include <functional>
 #include <pebbl/utilib/SmartPtr.h>
 #include <pebbl/utilib/PackObject.h>
 
@@ -202,22 +203,22 @@ public:
    std::set<string> categories;
 
    /**
-    * Pointer to an object that contains a unary_function that is
+    * Pointer to an object that contains a function that is
     * used to validate a parameter value.
     */
    SmartPtr<ParameterValidatorBase> validator;
 
    /**
-    * Pointer to an object that contains a unary_function that is
+    * Pointer to an object that contains a function that is
     * used to validate a parameter value.
     */
    SmartPtr<ListParameterFunctorBase> list_functor;
 
    /**
-    * Pointer to an object that contains a unary_function that performs a
+    * Pointer to an object that contains a function that performs a
     * callback when the parameter is set.
     */
-   std::unary_function<Any, void>* callback;
+   std::function<void(Any)>* callback;
 
    ///
    bool is_bool;

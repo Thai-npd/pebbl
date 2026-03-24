@@ -50,8 +50,9 @@ public:
  * to simplify their create_option() declaration by omitting the second
  * template parameter.
  */
-class ParameterValidatorFunction : public std::unary_function<Any,bool>
+class ParameterValidatorFunction
 {
+  virtual bool operator()(const Any&) { return true; };
 };
 
 
@@ -92,7 +93,7 @@ public:
  * Class that validates a lower bound of a parameter.
  */
 template <class Type>
-class ParameterLowerBound : public std::unary_function<Any,bool>
+class ParameterLowerBound : public ParameterValidatorFunction
 {
 public:
 
@@ -116,7 +117,7 @@ public:
  * Class that validates an upper bound of a parameter.
  */
 template <class Type>
-class ParameterUpperBound : public std::unary_function<Any,bool>
+class ParameterUpperBound : public ParameterValidatorFunction
 {
 public:
 
@@ -140,7 +141,7 @@ public:
  * Class that validates a lower and upper bounds of a parameter.
  */
 template <class Type>
-class ParameterBounds : public std::unary_function<Any,bool>
+class ParameterBounds : public ParameterValidatorFunction
 {
 public:
 
@@ -169,7 +170,7 @@ public:
  * Class that validates a non-negative parameter.
  */
 template <class Type>
-class ParameterNonnegative : public std::unary_function<Any,bool>
+class ParameterNonnegative : public ParameterValidatorFunction
 {
 public:
 
@@ -190,7 +191,7 @@ public:
  * Class that validates a positive parameter.
  */
 template <class Type>
-class ParameterPositive : public std::unary_function<Any,bool>
+class ParameterPositive : public ParameterValidatorFunction
 {
 public:
 

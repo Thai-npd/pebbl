@@ -38,7 +38,7 @@ class ParameterList;
 /**
  * A callback class that can be used with a ParameterSet object.
  */
-class ParamFileCallback : public std::unary_function<Any,void>
+class ParamFileCallback
 {
 public:
 
@@ -223,7 +223,7 @@ public:
 
   /// Set a parameter callback that is called when the parameter is set
   void set_parameter_callback(const std::string& name, 
-		std::unary_function<Any,void>& func);
+		                      std::function<void(Any)> func);
 
   /// Set a parameter default
   void set_parameter_default(const std::string& name, const std::string& default_value);
@@ -573,7 +573,7 @@ return tmp;
 //
 //
 inline void ParameterSet::set_parameter_callback(const std::string& name, 
-			std::unary_function<Any,void>& func)
+			                                     std::function<void(Any)> func)
 {
 try {
   Parameter& param = find_parameter(name);
