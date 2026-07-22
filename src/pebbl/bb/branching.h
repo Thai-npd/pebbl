@@ -953,8 +953,12 @@ public:
 
  protected:
 
-  double gapDenom(double boundValue)
-    { return std::max(std::fabs(boundValue),std::fabs(incumbentValue)); };
+  // NOTE: this function is modified from the original PEBBL to ensure a consistent gap formula
+  // with SeBBiQ. The original returned std::max(std::fabs(boundValue), std::fabs(incumbentValue));
+  // SeBBiQ defines the relative gap as |incumbent - bound| / max(1, |incumbent|), so we use
+  // max(1, |incumbent|) as the denominator here (the max(1,.) guards a tiny/zero incumbent).
+  double gapDenom(double /*boundValue*/)
+    { return std::max(1.0, std::fabs(incumbentValue)); };
  
   virtual void statusPrint(int&        lastPrint, 
 			   double&     lastPrintTime,
